@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
 import CodePane from './CodePane';
 import '../TestContainer.css';
 
@@ -11,9 +10,10 @@ class TestContainer extends Component {
     }
   }
   updateCode(newCode) {
-      this.setState({
-          code: newCode,
-      });
+      // this.setState({
+      //     code: newCode,
+      // });
+      this.props.updateCode(newCode)
     }
   runCode(){
 
@@ -21,7 +21,7 @@ class TestContainer extends Component {
   render() {
     return (
       <div className="TestContainer">
-        <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.state.code}/>
+        <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.props.code}/>
       </div>
     );
   }
