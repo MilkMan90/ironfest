@@ -5,10 +5,24 @@ import '../CodeContainer.css';
 
 
 class CodeContainer extends Component {
+  constructor(){
+    super()
+    this.state = {
+      code: ''
+    }
+  }
+  updateCode(newCode) {
+      this.setState({
+          code: newCode,
+      });
+    }
+  runCode(){
+
+  }
   render() {
     return (
       <div className="CodeContainer">
-        <CodePane />
+        <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.state.code}/>
       </div>
     );
   }

@@ -14,9 +14,7 @@ class CodePane extends Component {
     }
   }
   updateCode(newCode) {
-    this.setState({
-        code: newCode,
-    });
+    this.props.updateCode(newCode)
   }
   render() {
     var options = {
@@ -24,7 +22,7 @@ class CodePane extends Component {
     };
     return (
       <div className="CodePane">
-        <CodeMirror mode={this.state.mode} value={this.state.code} onChange={()=>this.updateCode()} options={options}/>
+        <CodeMirror mode={this.state.mode} value={this.props.code} onChange={this.updateCode.bind(this)} options={options}/>
       </div>
     );
   }

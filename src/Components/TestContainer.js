@@ -4,10 +4,24 @@ import CodePane from './CodePane';
 import '../TestContainer.css';
 
 class TestContainer extends Component {
+  constructor(){
+    super()
+    this.state = {
+      code: ''
+    }
+  }
+  updateCode(newCode) {
+      this.setState({
+          code: newCode,
+      });
+    }
+  runCode(){
+
+  }
   render() {
     return (
       <div className="TestContainer">
-        <CodePane />
+        <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.state.code}/>
       </div>
     );
   }
