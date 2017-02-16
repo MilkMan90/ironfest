@@ -10,9 +10,10 @@ class TestContainer extends Component {
     }
   }
   updateCode(newCode) {
-      this.setState({
-          code: newCode,
-      });
+      // this.setState({
+      //     code: newCode,
+      // });
+      this.props.updateCode(newCode)
     }
   runCode(){
 
@@ -20,7 +21,7 @@ class TestContainer extends Component {
   render() {
     return (
       <div className="TestContainer">
-        <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.state.code}/>
+        <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.props.code}/>
       </div>
     );
   }

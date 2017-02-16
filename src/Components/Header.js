@@ -23,6 +23,7 @@ class Header extends Component {
     return (
       <header className="Header">
         <h1>IronFest</h1>
+
         {user ? user.name
           : <button onClick={auth.login.bind(this)}>>Log In</button>
         }
