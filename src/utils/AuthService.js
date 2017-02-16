@@ -33,6 +33,7 @@ export default class AuthService  {
   logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
+    this.setState({user: ''})
   }
 
   loggedIn() {

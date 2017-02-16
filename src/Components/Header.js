@@ -26,6 +26,7 @@ class Header extends Component {
         {user ? user.name
           : <button onClick={auth.login.bind(this)}>>Log In</button>
         }
+        {user ? <button onClick={auth.logout.bind(this)}>>Log Out</button> : ''}
       </header>
     );
   }
