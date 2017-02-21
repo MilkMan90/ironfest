@@ -21,7 +21,7 @@ var temp_dir;
 if(app.settings.env === "development"){
   temp_dir = path.join(process.cwd(), 'server/test/');
 } else {
-  temp_dir = path.join(process.cwd(), 'tmp/test');
+  temp_dir = path.join(process.cwd(), 'temp/test');
 }
 
 app.use(bodyParser.json())
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 if (!fs.existsSync(temp_dir)){
   fs.mkdir(temp_dir, function(){
-    fs.open('/tmp/test/test.js', 'w', function(){
+    fs.open('/temp/test/test.js', 'w', function(){
 
     });
   });
@@ -38,7 +38,7 @@ if (!fs.existsSync(temp_dir)){
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
 
-  fs.open('/tmp/test/test.js', 'w', function(){
+  fs.open('/temp/test/test.js', 'w', function(){
     fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
         mocha.addFile(
           // fs.writeFileSync()
