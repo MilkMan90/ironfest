@@ -28,8 +28,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 if (!fs.existsSync(temp_dir)){
-  fs.mkdir(temp_dir);
-  fs.open(path.join(temp_dir, 'test.js'), 'w');
+  fs.mkdir(temp_dir, ()=>{
+    fs.open(path.join(temp_dir, 'test.js'), 'w');
+  });
 }
 
 app.post('/api/newtest', (request, response) => {
