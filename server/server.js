@@ -40,7 +40,7 @@ app.post('/api/newtest', (request, response) => {
 
   fs.open('/temp/test/test.js', 'w', function(){
     // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
-    fs.writeFile('/temp/test/test.js'), request.body.test, (err) => {
+    fs.writeFile('/temp/test/test.js', request.body.test, (err) => {
         mocha.addFile(
           // fs.writeFileSync()
           path.join('/temp/test/test.js')
