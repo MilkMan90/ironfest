@@ -27,7 +27,10 @@ if(app.settings.env === "development"){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-console.log(temp_dir);
+if (!fs.existsSync(temp_dir)){
+  fs.mkdirSync(temp_dir);
+  fs.openSync(path.join(temp_dir, 'test.js'), 'w');
+}
 
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
