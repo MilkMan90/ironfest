@@ -15,9 +15,7 @@ class TestContainer extends Component {
       // });
       this.props.updateCode(newCode)
     }
-  runCode(){
 
-  }
   render() {
     return (
       <div className="TestContainer">
