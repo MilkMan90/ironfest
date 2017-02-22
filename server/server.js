@@ -39,7 +39,7 @@ console.log(temp_dir);
 
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
-  
+
   fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
     fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
     // fs.writeFile('server/tmp/test.js', request.body.test, (err) => {
@@ -57,6 +57,7 @@ app.post('/api/newtest', (request, response) => {
         //   }
         //
         // })
+        console.log('run mocha');
         var thing = mocha.run()
     })
   });
