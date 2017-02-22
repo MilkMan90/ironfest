@@ -41,7 +41,7 @@ function runMochaTests() {
     } );
     var mocha = new Mocha();
     // mocha.addFile( 'run_test.js' );
-    mocha.addFile(temp_dir);
+    mocha.addFile('/tmp/test.js');
     mocha.run();
 }
 
