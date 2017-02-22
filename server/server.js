@@ -21,7 +21,7 @@ var temp_dir;
 if(app.settings.env === "development"){
   temp_dir = path.join(process.cwd(), 'server/test/');
 } else {
-  temp_dir = path.join(process.cwd(), 'tmp/');
+  temp_dir = 'tmp';
 }
 
 app.use(bodyParser.json())
