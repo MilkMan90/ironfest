@@ -58,7 +58,12 @@ app.post('/api/newtest', (request, response) => {
 
 
           console.log('run mocha');
-          var thing = mocha.run()
+          // var thing = mocha.run()
+          var thing = mocha.run(function(failures){
+            process.on('exit', function () {
+            process.exit(failures);  // exit with non-zero status if there were failures
+          });
+});
           console.log(thing);
         })
 
