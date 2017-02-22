@@ -52,7 +52,7 @@ app.post('/api/newtest', (request, response) => {
           path.join('/tmp/test.js')
         );
 
-        fs.readFile('/tmp/test.js', (err, data) => {
+        fs.readFile('/tmp/test.js', 'utf8', (err, data) => {
           if (err) throw err;
           console.log(data);
 
