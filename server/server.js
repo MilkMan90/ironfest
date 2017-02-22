@@ -53,7 +53,7 @@ app.post('/api/newtest', (request, response) => {
           path.join('/tmp/test.js')
         );
 
-        fs.readdir('app', (err, files) => {
+        fs.readdir('/tmp', (err, files) => {
           if(files){
             files.forEach(file => {
               console.log(file);
