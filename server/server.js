@@ -14,8 +14,6 @@ const MongoClient = require('mongodb').MongoClient
 //
 // }
 
-var mocha = new Mocha();
-
 var temp_dir;
 
 if(app.settings.env === "development"){
@@ -46,6 +44,7 @@ app.post('/api/newtest', (request, response) => {
 
 
     fs.writeFile('/tmp/test.js', request.body.test, (err) => {
+      var mocha = new Mocha();
         mocha.addFile(
           // fs.writeFileSync()
           // path.join(temp_dir, 'test.js')
