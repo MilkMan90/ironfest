@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //   });
 // }
 
-fs.readdir('/tmp/', (err, files) => {
+fs.readdir('./tmp/', (err, files) => {
   files.forEach(file => {
     console.log(file);
   });
