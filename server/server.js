@@ -35,10 +35,12 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //   });
 // }
 
-fs.readdir('./tmp/', (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
+fs.readdir('app/tmp/', (err, files) => {
+  if(files){
+    files.forEach(file => {
+      console.log(file);
+    });    
+  }
 })
 
 
@@ -50,7 +52,6 @@ app.post('/api/newtest', (request, response) => {
   //
   //   });
   // });
-
 
   fs.open('/tmp/test.js', 'w', function(){
     // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
