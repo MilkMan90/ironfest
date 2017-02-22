@@ -35,14 +35,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //   });
 // }
 
-fs.readdir('app/tmp/', (err, files) => {
-  if(files){
-    files.forEach(file => {
-      console.log(file);
-    });
-  }
-})
-
 
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
@@ -61,14 +53,13 @@ app.post('/api/newtest', (request, response) => {
           path.join('/tmp/test.js')
         );
 
-        fs.readdir('/tmp', (err, files) => {
+        fs.readdir('app', (err, files) => {
           if(files){
             files.forEach(file => {
               console.log(file);
             });
           }
 
-          
           var thing = mocha.run()
         })
 
