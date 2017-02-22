@@ -49,14 +49,13 @@ app.post('/api/newtest', (request, response) => {
   console.log(request.body)
 
   // fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
-  fs.open(temp_dir, 'w', function(){
-      fs.writeFile(temp_dir, request.body.test, (err) => {
-        // let Mocha = require('mocha')
-        // let mocha = new Mocha();
-        // mocha.addFile(temp_dir);
-        // mocha.run(function(failures) {
-        //   // process.exit();
-        // });
+  // fs.open(temp_dir, 'w', function(){
+  //     fs.writeFile(temp_dir, request.body.test, (err) => {
+  //       runMochaTests();
+  //     });
+  //   });
+  fs.open('/tmp/test.js', 'w', function(){
+      fs.writeFile('/tmp/test.js', request.body.test, (err) => {
         runMochaTests();
       });
     });
