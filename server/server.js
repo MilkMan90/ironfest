@@ -52,6 +52,7 @@ app.post('/api/newtest', (request, response) => {
 
         console.log('run mocha');
         var thing = mocha.run()
+        console.log(thing);
     })
   });
 
