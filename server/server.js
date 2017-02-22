@@ -48,15 +48,7 @@ app.post('/api/newtest', (request, response) => {
           path.join(temp_dir, 'test.js')
           // path.join('server/test/test.js')
         );
-        //
-        // fs.readdir('/tmp', (err, files) => {
-        //   if(files){
-        //     files.forEach(file => {
-        //       console.log(file);
-        //     });
-        //   }
-        //
-        // })
+
         console.log('run mocha');
         var thing = mocha.run()
     })
