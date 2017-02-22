@@ -38,11 +38,11 @@ if (!fs.existsSync(temp_dir)){
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
 
-  fs.mkdir(temp_dir, function(){
-    fs.open('/tmp/test.js', 'w', function(){
-
-    });
-  });
+  // fs.mkdir(temp_dir, function(){
+  //   fs.open('/tmp/test.js', 'w', function(){
+  //
+  //   });
+  // });
 
   fs.open('/tmp/test.js', 'w', function(){
     // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
