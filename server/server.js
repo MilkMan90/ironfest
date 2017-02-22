@@ -61,15 +61,17 @@ app.post('/api/newtest', (request, response) => {
           path.join('/tmp/test.js')
         );
 
-        fs.readdir('tmp', (err, files) => {
+        fs.readdir('/tmp', (err, files) => {
           if(files){
             files.forEach(file => {
               console.log(file);
             });
           }
+
+          
+          var thing = mocha.run()
         })
 
-        var thing = mocha.run()
     })
   });
 
