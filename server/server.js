@@ -2,10 +2,11 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser');
 // const cors = require('express-cors');
-var Mocha = require('mocha')
 var chai = require('chai')
 var mongoose=require('mongoose');
 var fs = require('fs')
+let Mocha = require('mocha')
+
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient
 
@@ -17,9 +18,10 @@ const MongoClient = require('mongodb').MongoClient
 var temp_dir;
 
 if(app.settings.env === "development"){
-  temp_dir = path.join(process.cwd(), 'server/test/');
+  temp_dir = path.join(process.cwd(), 'server/tmp/test.js');
 } else {
-  temp_dir = 'tmp';
+  temp_dir = path.join('tmp/temp.js');
+  // temp_dir = path.join(process.cwd(), 'tmp/temp.js');
 }
 
 app.use(bodyParser.json())
@@ -33,20 +35,31 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 //   });
 // }
 
-console.log(temp_dir);
+function runMochaTests() {
+    Object.keys( require.cache ).forEach( function( file ) {
+        delete require.cache[ file ];
+    } );
+    var mocha = new Mocha();
+    // mocha.addFile( 'run_test.js' );
+    mocha.addFile(temp_dir);
+    mocha.run();
+}
 
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
 
   // fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
-  fs.open('/tmp/test.js', 'w', function(){
-    fs.writeFile('/tmp/test.js', request.body.test, (err) => {
-      var mocha = new Mocha();
-      mocha.addFile('/tmp/test.js');
-      mocha.run();
+  fs.open(temp_dir, 'w', function(){
+      fs.writeFile(temp_dir, request.body.test, (err) => {
+        // let Mocha = require('mocha')
+        // let mocha = new Mocha();
+        // mocha.addFile(temp_dir);
+        // mocha.run(function(failures) {
+        //   // process.exit();
+        // });
+        runMochaTests();
+      });
     });
-  });
-
 });
 
 app.get('/users', (request, response) => {
