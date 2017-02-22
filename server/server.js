@@ -61,8 +61,6 @@ app.post('/api/newtest', (request, response) => {
           path.join('/tmp/test.js')
         );
 
-        mocha.addFile(chai)
-
         fs.readdir('/tmp/', (err, files) => {
           if(files){
             files.forEach(file => {
