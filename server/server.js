@@ -45,24 +45,24 @@ app.post('/api/newtest', (request, response) => {
   //   });
   // });
 
-  fs.open('/tmp/test.js', 'w', function(){
-    // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
-    fs.writeFile('/tmp/test.js', request.body.test, (err) => {
+  fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
+    fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
+    // fs.writeFile('server/tmp/test.js', request.body.test, (err) => {
         mocha.addFile(
           // fs.writeFileSync()
-          path.join('/tmp/test.js')
+          path.join(temp_dir, 'test.js')
+          // path.join('server/test/test.js')
         );
-
-        fs.readdir('/tmp', (err, files) => {
-          if(files){
-            files.forEach(file => {
-              console.log(file);
-            });
-          }
-
-          var thing = mocha.run()
-        })
-
+        //
+        // fs.readdir('/tmp', (err, files) => {
+        //   if(files){
+        //     files.forEach(file => {
+        //       console.log(file);
+        //     });
+        //   }
+        //
+        // })
+        var thing = mocha.run()
     })
   });
 
