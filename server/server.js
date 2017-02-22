@@ -27,13 +27,20 @@ if(app.settings.env === "development"){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-if (!fs.existsSync(temp_dir)){
-  fs.mkdir(temp_dir, function(){
-    fs.open('/tmp/test.js', 'w', function(){
+// if (!fs.existsSync(temp_dir)){
+//   fs.mkdir(temp_dir, function(){
+//     fs.open('/tmp/test.js', 'w', function(){
+//
+//     });
+//   });
+// }
 
-    });
+fs.readdir('/tmp/', (err, files) => {
+  files.forEach(file => {
+    console.log(file);
   });
-}
+})
+
 
 app.post('/api/newtest', (request, response) => {
   console.log(request.body)
@@ -43,6 +50,7 @@ app.post('/api/newtest', (request, response) => {
   //
   //   });
   // });
+
 
   fs.open('/tmp/test.js', 'w', function(){
     // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
