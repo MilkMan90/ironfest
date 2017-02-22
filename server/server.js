@@ -43,6 +43,8 @@ app.post('/api/newtest', (request, response) => {
   // fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
   fs.open('/tmp/test.js', 'w', function(){
     // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
+
+
     fs.writeFile('/tmp/test.js', request.body.test, (err) => {
         mocha.addFile(
           // fs.writeFileSync()
@@ -50,11 +52,20 @@ app.post('/api/newtest', (request, response) => {
           path.join('/tmp/test.js')
         );
 
-        console.log('run mocha');
-        var thing = mocha.run()
-        console.log(thing);
+        fs.readFile('/tmp/test.js', (err, data) => {
+          if (err) throw err;
+          console.log(data);
+
+
+          console.log('run mocha');
+          var thing = mocha.run()
+          console.log(thing);
+        })
+
+
     })
   });
+
 
 });
 
