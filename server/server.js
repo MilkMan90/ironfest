@@ -40,36 +40,12 @@ app.post('/api/newtest', (request, response) => {
 
   // fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
   fs.open('/tmp/test.js', 'w', function(){
-    // fs.writeFile(path.join(temp_dir, 'test.js'), request.body.test, (err) => {
-
-
     fs.writeFile('/tmp/test.js', request.body.test, (err) => {
       var mocha = new Mocha();
-        mocha.addFile(
-          // fs.writeFileSync()
-          // path.join(temp_dir, 'test.js')
-          path.join('/tmp/test.js')
-        );
-
-        fs.readFile('/tmp/test.js', 'utf8', (err, data) => {
-          if (err) throw err;
-          console.log(data);
-
-
-          console.log('run mocha');
-          // var thing = mocha.run()
-          var thing = mocha.run(function(failures){
-            process.on('exit', function () {
-            process.exit(failures);  // exit with non-zero status if there were failures
-          });
-});
-          console.log(thing);
-        })
-
-
-    })
+      mocha.addFile('/tmp/test.js');
+      mocha.run();
+    });
   });
-
 
 });
 
