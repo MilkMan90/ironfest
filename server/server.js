@@ -39,7 +39,7 @@ fs.readdir('app/tmp/', (err, files) => {
   if(files){
     files.forEach(file => {
       console.log(file);
-    });    
+    });
   }
 })
 
@@ -59,8 +59,16 @@ app.post('/api/newtest', (request, response) => {
         mocha.addFile(
           // fs.writeFileSync()
           path.join('/tmp/test.js')
-
         );
+
+        fs.readdir('app/tmp/', (err, files) => {
+          if(files){
+            files.forEach(file => {
+              console.log(file);
+            });
+          }
+        })
+        
         var thing = mocha.run()
     })
   });
