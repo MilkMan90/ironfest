@@ -53,10 +53,10 @@ class App extends Component {
         body: JSON.stringify({
           main: this.state.mainCode,
           test: this.state.testCode
-          // test: fakeTest
         })
     })
     .then((res)=>{
+      console.log(res);
       return res.json()
     })
     .then((res)=>{
