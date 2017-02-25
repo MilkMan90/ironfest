@@ -39,7 +39,7 @@ var temp_dir;
 if(app.settings.env === "development"){
   temp_dir = path.join(process.cwd(), 'server/tmp/test.js');
 } else {
-  temp_dir = path.join('tmp/temp.js');
+  temp_dir = '/tmp/temp.js';
   // temp_dir = path.join(process.cwd(), 'tmp/temp.js');
 }
 
