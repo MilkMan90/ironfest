@@ -38,7 +38,6 @@ class App extends Component {
     });
   }
   updateConsole(line){
-    console.log(line);
     this.setState({
       consoleOutput: this.state.consoleOutput.concat(line)
     })
@@ -64,7 +63,6 @@ class App extends Component {
     })
   }
   render() {
-    // console.log(mocha);
     return (
       <div className="App">
         <Header auth={auth}/>

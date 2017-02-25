@@ -3,7 +3,6 @@ import '../Console.css';
 
 class Console extends Component {
   render() {
-    console.log(this.props.consoleLog);
     let consoleOutput;
     if(this.props.consoleLog){
       consoleOutput = this.props.consoleLog.map((line, i)=>{
