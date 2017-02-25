@@ -11,6 +11,25 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient
 
 
+
+// var { assert } = require('../app/node_modules/chai');
+//
+// describe('IronFE', function() {
+//   it('vowel check should return true ALEX', function() {
+//     assert.equal(true, true)
+//   })
+//    it('vowel check should return true ALEX', function() {
+//     assert.equal(false, true)
+//   })
+// })
+
+//assert for localhost:
+//var { assert } = require('../chai');
+
+
+//assert for server:
+//var { assert } = require('../app/node_modules/chai');
+
 // if(process.env.NODE_ENV === ){
 //
 // }
@@ -27,36 +46,44 @@ if(app.settings.env === "development"){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-// if (!fs.existsSync(temp_dir)){
-//   fs.mkdir(temp_dir, function(){
-//     fs.open('/tmp/test.js', 'w', function(){
-//
-//     });
-//   });
-// }
-
 function runMochaTests() {
     Object.keys( require.cache ).forEach( function( file ) {
         delete require.cache[ file ];
     } );
     var mocha = new Mocha();
-    // mocha.addFile( 'run_test.js' );
-    mocha.addFile('/tmp/test.js');
-    mocha.run();
+    // mocha.addFile('/tmp/test.js');
+    mocha.addFile(temp_dir);
+    return mocha.run()
 }
 
 app.post('/api/newtest', (request, response) => {
-  console.log(request.body)
-
-  // fs.open(path.join(temp_dir, 'test.js'), 'w', function(){
-  // fs.open(temp_dir, 'w', function(){
-  //     fs.writeFile(temp_dir, request.body.test, (err) => {
-  //       runMochaTests();
-  //     });
-  //   });
-  fs.open('/tmp/test.js', 'w', function(){
-      fs.writeFile('/tmp/test.js', request.body.test, (err) => {
-        runMochaTests();
+  var testArray = []
+  fs.open(temp_dir, 'w', function(){
+    return fs.writeFile(temp_dir, request.body.test, (err) => {
+  // fs.open('/tmp/test.js', 'w', function(){
+  //     fs.writeFile('/tmp/test.js', request.body.test, (err) => {
+        const runner = runMochaTests();
+        runner.on('pass', (test)=>{
+          let testDetails = {
+            title: test.title,
+            body: test.body,
+            state: test.state,
+            error: test.err
+          }
+          testArray.push(testDetails)
+        })
+        runner.on('fail', (test)=>{
+          let testDetails = {
+            title: test.title,
+            body: test.body,
+            state: test.state,
+            error: test.err
+          }
+          testArray.push(testDetails)
+        })
+        runner.on('end', (test)=>{
+          response.status(200).send(testArray)
+        })
       });
     });
 });
