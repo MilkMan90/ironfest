@@ -55,11 +55,26 @@ function runMochaTests() {
     mocha.addFile(temp_dir);
     return mocha.run()
 }
+const generateCodeFile = (mainCode, testCode) => {
+  return addChaiToTestCode(testCode)
+}
+const addChaiToTestCode = (testCode) => {
 
+  const localChai = `var { assert } = require('../chai');`
+  const serverChai = `var { assert } = require('../app/node_modules/chai');`
+
+  if(app.settings.env === "development"){
+    return localChai + testCode
+  } else {
+    return serverChai + testCode
+  }
+}
 app.post('/api/newtest', (request, response) => {
   var testArray = []
   fs.open(temp_dir, 'w', function(){
-    return fs.writeFile(temp_dir, request.body.test, (err) => {
+
+    const code = generateCodeFile(request.body.main, request.body.test);
+    return fs.writeFile(temp_dir, code, (err) => {
   // fs.open('/tmp/test.js', 'w', function(){
   //     fs.writeFile('/tmp/test.js', request.body.test, (err) => {
         const runner = runMochaTests();
