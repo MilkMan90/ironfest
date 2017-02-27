@@ -38,7 +38,6 @@ class App extends Component {
     });
   }
   updateConsole(line){
-    console.log(line);
     this.setState({
       consoleOutput: this.state.consoleOutput.concat(line)
     })
@@ -61,10 +60,26 @@ class App extends Component {
     })
     .then((res)=>{
       console.log(res);
+      //send output to console
+      this.pushResultIntoConsole(res)
     })
   }
+  pushResultIntoConsole(resultArray){
+    console.log(resultArray);
+    resultArray.forEach((test)=>{
+      let resultString = `${test.title} - ${test.state} `
+      if(test.state === 'failed'){
+        resultString = resultString + ` ${test.error.message}`
+      }
+      this.setState({
+        consoleOutput: this.state.consoleOutput.concat(resultString)
+      })
+    })
+    // this.setState({
+    //   consoleOutput: this.state.consoleOutput.concat(res)
+    // })
+  }
   render() {
-    // console.log(mocha);
     return (
       <div className="App">
         <Header auth={auth}/>

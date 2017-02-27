@@ -56,7 +56,8 @@ function runMochaTests() {
     return mocha.run()
 }
 const generateCodeFile = (mainCode, testCode) => {
-  return addChaiToTestCode(testCode)
+  console.log(mainCode);
+  return mainCode + ' ; ' + addChaiToTestCode(testCode)
 }
 const addChaiToTestCode = (testCode) => {
 
@@ -75,8 +76,6 @@ app.post('/api/newtest', (request, response) => {
 
     const code = generateCodeFile(request.body.main, request.body.test);
     return fs.writeFile(temp_dir, code, (err) => {
-  // fs.open('/tmp/test.js', 'w', function(){
-  //     fs.writeFile('/tmp/test.js', request.body.test, (err) => {
         const runner = runMochaTests();
         runner.on('pass', (test)=>{
           let testDetails = {
