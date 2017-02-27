@@ -60,7 +60,24 @@ class App extends Component {
     })
     .then((res)=>{
       console.log(res);
+      //send output to console
+      this.pushResultIntoConsole(res)
     })
+  }
+  pushResultIntoConsole(resultArray){
+    console.log(resultArray);
+    resultArray.forEach((test)=>{
+      let resultString = `${test.title} - ${test.state} `
+      if(test.state === 'failed'){
+        resultString = resultString + ` ${test.error.message}`
+      }
+      this.setState({
+        consoleOutput: this.state.consoleOutput.concat(resultString)
+      })
+    })
+    // this.setState({
+    //   consoleOutput: this.state.consoleOutput.concat(res)
+    // })
   }
   render() {
     return (
