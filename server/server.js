@@ -10,8 +10,6 @@ let Mocha = require('mocha')
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient
 
-
-
 // var { assert } = require('../app/node_modules/chai');
 //
 // describe('IronFE', function() {
@@ -46,17 +44,8 @@ if(app.settings.env === "development"){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-function runMochaTests() {
-    Object.keys( require.cache ).forEach( function( file ) {
-        delete require.cache[ file ];
-    } );
-    var mocha = new Mocha();
-    // mocha.addFile('/tmp/test.js');
-    mocha.addFile(temp_dir);
-    return mocha.run()
-}
+
 const generateCodeFile = (mainCode, testCode) => {
-  console.log(mainCode);
   return mainCode + ' ; ' + addChaiToTestCode(testCode)
 }
 const addChaiToTestCode = (testCode) => {
@@ -70,6 +59,22 @@ const addChaiToTestCode = (testCode) => {
     return serverChai + testCode
   }
 }
+
+function runMochaTests() {
+    Object.keys( require.cache ).forEach( function( file ) {
+        delete require.cache[ file ];
+    } );
+    var mocha = new Mocha();
+    mocha.addFile(temp_dir);
+    mocha.allowUncaught()
+
+    try {
+      return mocha.run()
+    } catch (e) {
+      return e;
+    }
+}
+
 app.post('/api/newtest', (request, response) => {
   var testArray = []
   fs.open(temp_dir, 'w', function(){
@@ -77,39 +82,36 @@ app.post('/api/newtest', (request, response) => {
     const code = generateCodeFile(request.body.main, request.body.test);
     return fs.writeFile(temp_dir, code, (err) => {
         const runner = runMochaTests();
-        runner.on('pass', (test)=>{
-          let testDetails = {
-            title: test.title,
-            body: test.body,
-            state: test.state,
-            error: test.err
-          }
-          testArray.push(testDetails)
-        })
-        runner.on('fail', (test)=>{
-          let testDetails = {
-            title: test.title,
-            body: test.body,
-            state: test.state,
-            error: test.err
-          }
-          testArray.push(testDetails)
-        })
-        runner.on('end', (test)=>{
-          response.status(200).send(testArray)
-        })
+        if(!(runner instanceof Error)) {
+          runner.on('pass', (test)=>{
+            let testDetails = {
+              title: test.title,
+              body: test.body,
+              state: test.state,
+              error: test.err
+            }
+            testArray.push(testDetails)
+          })
+          runner.on('fail', (test)=>{
+            let testDetails = {
+              title: test.title,
+              body: test.body,
+              state: test.state,
+              error: test.err
+            }
+            testArray.push(testDetails)
+          })
+          runner.on('end', (test)=>{
+            response.status(200).send(testArray)
+          })
+        } else {
+          console.log('hey');
+          response.status(404).send({error: runner.message})
+        }
       });
     });
 });
 
-app.get('/users', (request, response) => {
-  User.find(function(err, users) {
-  if (err) {
-    response.send(err)
-  }
-  response.send({ users: users });
-  })
-});
 
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 

@@ -12,3 +12,11 @@
   font-size: 14px;
   font-family: Courier;
 }
+
+.pass {
+  color: green;
+}
+
+.error{
+  color: red;
+}
