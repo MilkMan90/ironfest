@@ -331,16 +331,64 @@ const AssertCode = [
   },
   {
     name: 'includeMembers',
-    doc: `.includeMembers(superset, subset, [message])`,
+    doc: `includeMembers(superset, subset, [message])`,
     desc: 'Asserts that subset is included in superset. Order is not taken into account.',
     code: `assert.includeMembers([ 1, 2, 3 ], [ 2, 1 ], 'include members');`
   },
   {
     name: 'includeDeepMembers',
-    doc: `.includeDeepMembers(superset, subset, [message])`,
+    doc: `includeDeepMembers(superset, subset, [message])`,
     desc: 'Asserts that subset is included in superset - using deep equality checking. Order is not taken into account. Duplicates are ignored.',
     code: `assert.includeDeepMembers([ {a: 1}, {b: 2}, {c: 3} ], [ {b: 2}, {a: 1}, {b: 2} ], 'include deep members');`
   },
+  {
+    name: 'oneOf',
+    doc: `oneOf(inList, list, [message])`,
+    desc: 'Asserts that non-object, non-array value inList appears in the flat array list.',
+    code: `assert.oneOf(1, [ 2, 1 ], 'Not found in list');`
+  },
+  {
+    name: 'changes',
+    doc: `changes(function, object, property)`,
+    desc: 'Asserts that a function changes the value of a property',
+    code: `assert.changes(fn, obj, 'val');`
+  },
+  {
+    name: 'doesNotChange',
+    doc: `doesNotChange(function, object, property)`,
+    desc: 'Asserts that a function does not changes the value of a property',
+    code: `assert.doesNotChange(fn, obj, 'val');`
+  },
+  {
+    name: 'increases',
+    doc: `increases(function, object, property)`,
+    desc: 'Asserts that a function increases an object property',
+    code: `assert.increases(fn, obj, 'val');`
+  },
+  {
+    name: 'doesNotIncrease',
+    doc: `doesNotIncrease(function, object, property)`,
+    desc: 'Asserts that a function does not increase object property',
+    code: `assert.doesNotIncrease(fn, obj, 'val');`
+  },
+  {
+    name: 'decreases',
+    doc: `decreases(function, object, property)`,
+    desc: 'Asserts that a function decreases an object property',
+    code: `assert.decreases(fn, obj, 'val');`
+  },
+  {
+    name: 'doesNotDecrease',
+    doc: `doesNotDecrease(function, object, property)`,
+    desc: 'Asserts that a function does not decreases an object property',
+    code: `assert.doesNotDecrease(fn, obj, 'val');`
+  },
+  {
+    name: 'isExtensible',
+    doc: `isExtensible(object)`,
+    desc: 'Asserts that object is extensible (can have new properties added to it).',
+    code: `assert.isExtensible({});`
+  }
 ]
 
 export default AssertCode;
