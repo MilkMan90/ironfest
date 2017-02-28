@@ -19,15 +19,17 @@ class Header extends Component {
   render() {
     const { auth } = this.props
     const { user } = this.state
-
+    console.log(user);
     return (
       <header className="Header">
-        <h1>IronFest</h1>
+        <h1><span className="iron">Iron</span><span className="f">F</span><span className="e">e</span><span className="s">s</span><span className="t">t</span></h1>
 
-        {user ? user.name
-          : <button onClick={auth.login.bind(this)}>>Log In</button>
-        }
-        {user ? <button onClick={auth.logout.bind(this)}>>Log Out</button> : ''}
+        <div className="login">
+          {user ? <span className="user-name">Welcome {user.name.split(' ')[0]}</span>
+            : <button className="login-button" onClick={auth.login.bind(this)}>Log In</button>
+          }
+          {user ? <button className="logout-button" onClick={auth.logout.bind(this)}>Log Out</button> : ''}
+        </div>
       </header>
     );
   }

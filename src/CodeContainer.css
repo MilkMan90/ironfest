@@ -5,4 +5,16 @@
 
 .run-code-button{
   position: absolute;
+  margin-top: 2px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #2ecc71;
+  width: 100px;
+  left: 21.5%;
+}
+
+.run-code-button:hover{
+  cursor: pointer;
+  background-color: #27ae60;
 }

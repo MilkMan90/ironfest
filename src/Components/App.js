@@ -6,6 +6,7 @@ import TestContainer from './TestContainer';
 // var mocha = require('mocha')
 import '../App.css';
 import AuthService from '../utils/AuthService'
+import ConsoleLine from '../utils/ConsoleLine'
 
 const auth = new AuthService('nN29JzO2WI7XO7Ra5L5muICb1NPj5k59', 'pilewski.auth0.com');
 
@@ -22,8 +23,17 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      mainCode: '',
-      testCode: '',
+      mainCode: `function example(){
+	return 'taylor rocks'
+}`,
+      testCode: `describe('Example Test', function() {
+  it('should be a function', function() {
+    assert.isFunction(example)
+  })
+  it('should return taylor rocks', function() {
+    assert.equal(example(), 'taylor rocks')
+  })
+})`,
       consoleOutput: []
     }
   }
@@ -38,12 +48,23 @@ class App extends Component {
     });
   }
   updateConsole(line){
+    const output = new ConsoleLine(line, 'error')
     this.setState({
-      consoleOutput: this.state.consoleOutput.concat(line)
+      consoleOutput: this.state.consoleOutput.concat(output)
     })
   }
+  runMainCode(){
+    try {
+      const result = eval(this.state.mainCode)
+      return true;
+    } catch (e) {
+      this.updateConsole(`${e.name}: ${e.message}`)
+      return false;
+    }
+  }
   runTest(){
-    fetch(`/api/newtest`, {
+    if(this.runMainCode()){
+      fetch(`/api/newtest`, {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -53,31 +74,41 @@ class App extends Component {
           main: this.state.mainCode,
           test: this.state.testCode
         })
-    })
-    .then((res)=>{
-      console.log(res);
-      return res.json()
-    })
-    .then((res)=>{
-      console.log(res);
-      //send output to console
-      this.pushResultIntoConsole(res)
-    })
+      })
+      .then((res)=>{
+        return res.json()
+      })
+      .then((res)=>{
+        this.updateConsole(res)
+      })
+    }
+  }
+  updateConsole(message){
+    if(!message.hasOwnProperty('error')){
+      this.pushResultIntoConsole(message)
+    } else{
+      this.pushErrorIntoConsole(message.error)
+    }
   }
   pushResultIntoConsole(resultArray){
-    console.log(resultArray);
     resultArray.forEach((test)=>{
       let resultString = `${test.title} - ${test.state} `
+      let state = 'pass'
       if(test.state === 'failed'){
-        resultString = resultString + ` ${test.error.message}`
+        resultString = resultString + ` | ${test.error.name} ${test.error.message}`
+        state = 'error'
       }
+      const output = new ConsoleLine(resultString, state)
       this.setState({
-        consoleOutput: this.state.consoleOutput.concat(resultString)
+        consoleOutput: this.state.consoleOutput.concat(output)
       })
     })
-    // this.setState({
-    //   consoleOutput: this.state.consoleOutput.concat(res)
-    // })
+  }
+  pushErrorIntoConsole(error){
+    const output = new ConsoleLine(error, 'error')
+    this.setState({
+      consoleOutput: this.state.consoleOutput.concat(output)
+    })
   }
   render() {
     return (
