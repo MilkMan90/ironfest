@@ -20,7 +20,9 @@
     "react-chatview": "^0.1.1",
     "react-codemirror": "^0.3.0",
     "react-dom": "^15.4.2",
-    "react-scroll": "^1.4.7"
+    "react-dropdown": "^1.2.1",
+    "react-scroll": "^1.4.7",
+    "react-tooltip": "^3.2.7"
   },
   "scripts": {
     "start": "react-scripts start",

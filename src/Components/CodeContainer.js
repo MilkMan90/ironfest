@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import CodePane from './CodePane';
 import '../CodeContainer.css';
 
-
 class CodeContainer extends Component {
   constructor(){
     super()

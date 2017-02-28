@@ -2,3 +2,32 @@
   display: inline-block;
   width: 50%;
 }
+
+.add-asserts-button{
+  position: absolute;
+  top: 53px;
+  right: 20px;
+}
+
+.assert-options-pane{
+  position: absolute;
+  right: 10px;
+  top: 73px;
+  width: 300px;
+  height: 600px;
+  border: 1px solid silver;
+  background-color: white;
+  z-index: 999;
+  flex-wrap: wrap;
+}
+
+.assert-item{
+  display: inline-block;
+  height: 30px;
+}
+
+.assert-button{
+  height: 30px;
+  width: 80px;
+  margin: 20px 10px 20px 10px;
+}

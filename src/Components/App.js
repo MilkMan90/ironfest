@@ -19,6 +19,7 @@ describe('IronFE', function() {
 })
 `
 
+var test = '';
 class App extends Component {
   constructor(){
     super()
@@ -34,8 +35,12 @@ class App extends Component {
     assert.equal(example(), 'taylor rocks')
   })
 })`,
-      consoleOutput: []
+      consoleOutput: [],
+      consolelog: '',
     }
+  }
+  componentDidMount(){
+
   }
   updateMainCode(newCode){
     this.setState({
@@ -90,6 +95,12 @@ class App extends Component {
       this.pushErrorIntoConsole(message.error)
     }
   }
+  passEvalToConsole(line){
+    const output = new ConsoleLine(line, 'code')
+    this.setState({
+      consoleOutput: this.state.consoleOutput.concat([output])
+    })
+  }
   pushResultIntoConsole(resultArray){
     resultArray.forEach((test)=>{
       let resultString = `${test.title} - ${test.state} `
@@ -110,13 +121,19 @@ class App extends Component {
       consoleOutput: this.state.consoleOutput.concat(output)
     })
   }
+  clearConsole(){
+    this.setState({
+      consoleOutput: []
+    })
+  }
   render() {
     return (
       <div className="App">
         <Header auth={auth}/>
-        <CodeContainer code={this.state.mainCode} updateCode = {(newCode)=>this.updateMainCode(newCode)} updateConsole={(line)=>{this.updateConsole(line)}}/>
+        <CodeContainer code={this.state.mainCode} updateCode = {(newCode)=>this.updateMainCode(newCode)} updateConsole={(line)=>{this.passEvalToConsole(line)}}/>
         <TestContainer code={this.state.testCode} updateCode = {(newCode)=>this.updateTestCode(newCode)}/>
         <button className="run-test-button" onClick={()=>this.runTest()}>Run Test</button>
+        <button className="clear-console-button" onClick={()=>this.clearConsole()}>Clear Console</button>
         <Console consoleLog = {this.state.consoleOutput}/>
       </div>
     );
