@@ -33,8 +33,9 @@ class CodeContainer extends Component {
   render() {
     return (
       <div className="CodeContainer">
+        <h3>Write Functions</h3>
         <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.props.code}/>
-        <button className="run-code-button" onClick={()=>this.runCode()}>Run Code</button>
+        <button className="run-code-button" onClick={()=>this.runCode()}>Run Code Only</button>
       </div>
     );
   }

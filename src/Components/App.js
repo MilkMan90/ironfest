@@ -19,13 +19,21 @@ describe('IronFE', function() {
 })
 `
 
-
 class App extends Component {
   constructor(){
     super()
     this.state = {
-      mainCode: '',
-      testCode: '',
+      mainCode: `function example(){
+	return 'taylor rocks'
+}`,
+      testCode: `describe('Example Test', function() {
+  it('should be a function', function() {
+    assert.isFunction(example)
+  })
+  it('should return taylor rocks', function() {
+    assert.equal(example(), 'taylor rocks')
+  })
+})`,
       consoleOutput: []
     }
   }
@@ -85,10 +93,12 @@ class App extends Component {
   pushResultIntoConsole(resultArray){
     resultArray.forEach((test)=>{
       let resultString = `${test.title} - ${test.state} `
+      let state = 'pass'
       if(test.state === 'failed'){
-        resultString = resultString + ` ${test.error.message}`
+        resultString = resultString + ` | ${test.error.name} ${test.error.message}`
+        state = 'error'
       }
-      const output = new ConsoleLine(resultString, 'pass')
+      const output = new ConsoleLine(resultString, state)
       this.setState({
         consoleOutput: this.state.consoleOutput.concat(output)
       })

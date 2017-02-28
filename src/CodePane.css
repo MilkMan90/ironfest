@@ -1,9 +1,24 @@
+h3{
+  background-color: #3498db;
+  padding: 3px;
+  color: white;
+  border-left: darkGrey 2px solid;
+}
+
 .CodePane{
   border: 1px solid silver;
   padding: 2px;
   width: 100%;
 }
 
+.CodePane:hover{
+  cursor: text;
+}
+
 .CodeMirror-line{
   text-align: left;
+}
+
+.CodeMirror-line:hover{
+  cursor: text;
 }
