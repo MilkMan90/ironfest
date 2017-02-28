@@ -9,6 +9,16 @@ h1 {
   padding: 10px;
 }
 
+.confetti-img{
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+}
+
+.confetti-1{
+  transform: rotateZ(270deg)
+}
+
 .login{
   position: absolute;
   top: 10px;

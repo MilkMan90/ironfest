@@ -42,3 +42,7 @@
 .clear-console-button{
 
 }
+
+button{
+  outline: none;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import '../Header.css';
+import '../styles/Header.css';
 import AuthService from '../utils/AuthService'
+import confetti from '../imgs/confetti.png'
 
 class Header extends Component {
   constructor() {
@@ -21,7 +22,15 @@ class Header extends Component {
     const { user } = this.state
     return (
       <header className="Header">
-        <h1><span className="iron">Iron</span><span className="f">F</span><span className="e">e</span><span className="s">s</span><span className="t">t</span></h1>
+        <h1>
+          <img src={confetti} className="confetti-img confetti-1"/>
+          <span className="iron">Iron</span>
+          <span className="f">F</span>
+          <span className="e">e</span>
+          <span className="s">s</span>
+          <span className="t">t</span>
+          <img src={confetti} className="confetti-img"/>
+        </h1>
 
         <div className="login">
           {user ? <span className="user-name">Welcome {user.name.split(' ')[0]}</span>

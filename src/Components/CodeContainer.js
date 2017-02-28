@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CodePane from './CodePane';
-import '../CodeContainer.css';
+import '../styles/CodeContainer.css';
 
 class CodeContainer extends Component {
   constructor(){

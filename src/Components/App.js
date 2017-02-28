@@ -4,7 +4,7 @@ import Console from './Console';
 import CodeContainer from './CodeContainer';
 import TestContainer from './TestContainer';
 // var mocha = require('mocha')
-import '../App.css';
+import '../styles/App.css';
 import AuthService from '../utils/AuthService'
 import ConsoleLine from '../utils/ConsoleLine'
 

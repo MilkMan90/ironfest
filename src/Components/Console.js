@@ -2,18 +2,16 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import Scroll from  'react-scroll';
 import ChatView from 'react-chatview'
-import '../Console.css';
+import '../styles/Console.css';
 
 class Console extends Component {
   scrollToBottom = () => {
       const node = ReactDOM.findDOMNode(this.messagesEnd);
       node.scrollIntoView({behavior: "smooth"});
   }
-
   componentDidMount() {
       this.scrollToBottom();
   }
-
   componentDidUpdate() {
       this.scrollToBottom();
   }

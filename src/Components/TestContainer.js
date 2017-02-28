@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import CodePane from './CodePane';
-import Dropdown from 'react-dropdown'
 import AssertCode from '../utils/assertSyntax'
 import ReactTooltip from 'react-tooltip'
-import '../TestContainer.css';
+import '../styles/TestContainer.css';
 
 class TestContainer extends Component {
   constructor(){
