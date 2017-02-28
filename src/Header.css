@@ -15,6 +15,37 @@ h1 {
   right: 10px;
 }
 
+.login-button{
+  margin-top: 2px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #2ecc71;
+  width: 100px;
+}
+
+.login-button:hover{
+  cursor: pointer;
+  background-color: #27ae60;
+}
+
+.logout-button{
+  margin-top: 2px;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  background-color: #e74c3c;
+  width: 100px;
+}
+
+.logout-button:hover{
+  cursor: pointer;
+  background-color: #c0392b;
+}
+
+
+
+
 .iron{
   color: #777;
   font-size: 30px;

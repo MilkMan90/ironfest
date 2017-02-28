@@ -19,7 +19,7 @@ class TestContainer extends Component {
   render() {
     return (
       <div className="TestContainer">
-        <h3>Write Your Tests</h3>
+        <h3>Write Tests</h3>
         <CodePane updateCode={(newCode)=>this.updateCode(newCode)} code={this.props.code}/>
       </div>
     );

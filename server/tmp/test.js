@@ -5,6 +5,6 @@ function example(){
     assert.isFunction(example)
   })
   it('should return taylor rocks', function() {
-    assert.equal(example(), 'taylor rdocks')
+    assert.equal(example(), 'taylord rocks')
   })
 })
