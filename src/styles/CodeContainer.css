@@ -1,11 +1,12 @@
 .CodeContainer{
   display: inline-block;
-  width: 50%;
+  width: 45%;
+  border-bottom: 1px solid silver;
 }
 
 .run-code-button{
   position: absolute;
-  margin-top: 5px;
+  margin-top: 7px;
   border: none;
   border-radius: 3px;
   color: white;

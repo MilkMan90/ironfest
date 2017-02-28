@@ -5,13 +5,18 @@ function example(){
     assert.isFunction(example)
   })
   it('should return taylor rocks', function() {
-    assert.isFunction(example)
-    assert.isNotOk('everything', 'this will fail');
+    assert.equal(example(), 'taylor rocks')
   })
-   it('should return taylor rocks', function() {
-    assert.isFunction(examdple)
-    assert.isNotOk('everything', 'this will fail');
+    it('should be a function', function() {
+    assert.isFunction(example)
+  })
+  it('should return taylor rocks', function() {
+    assert.equal(example(), 'taylor rocks')
+  })
+    it('should be a function', function() {
+    assert.isFunction(example)
+  })
+  it('should return taylor rocks', function() {
+    assert.equal(example(), 'taylor rocks')
   })
 })
-
-

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
-import '../CodePane.css';
+import '../styles/CodePane.css';
 import '../../node_modules/codemirror/lib/codemirror.css';
 
 
