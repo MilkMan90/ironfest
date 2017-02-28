@@ -19,7 +19,6 @@ class Header extends Component {
   render() {
     const { auth } = this.props
     const { user } = this.state
-    console.log(user);
     return (
       <header className="Header">
         <h1><span className="iron">Iron</span><span className="f">F</span><span className="e">e</span><span className="s">s</span><span className="t">t</span></h1>

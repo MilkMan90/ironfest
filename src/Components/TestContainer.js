@@ -22,10 +22,18 @@ class TestContainer extends Component {
     })
   }
   handleAddAssertion(assertType){
-
+    const code = this.findCode(assertType)
+    const newCode = this.props.code + '\n' + code
+    this.updateCode(newCode)
+    this.toggleShowAssertOptions()
+  }
+  findCode(assertType){
+    const assertObj = AssertCode.find((assert)=>{
+      return assert.name === assertType
+    })
+    return assertObj.code
   }
   render() {
-    console.log(AssertCode);
     let assertOptions;
     if(this.state.showAsserts){
     const assertButtonArray = AssertCode.map((assert, i)=>{
@@ -33,17 +41,21 @@ class TestContainer extends Component {
                 className="assert-item"
                 key={i}>
                 <button
-                className="assert-button"
-                onClick={()=>{this.handleAddAssertion(`${assert.name}`)}}
-                data-tip
-                data-for={`${assert.name}`}
+                  className="assert-button"
+                  onClick={()=>{this.handleAddAssertion(`${assert.name}`)}}
+                  data-tip
+                  data-for={`${assert.name}`}
                 >
                   {assert.name}
                 </button>
-                <ReactTooltip id={`${assert.name}`}>
-                  <div>{assert.desc}</div>
-                  <div>{assert.doc}</div>
-                  <div>{assert.code}</div>
+                <ReactTooltip
+                  type='info'
+                  id={`${assert.name}`}
+                >
+                    <div className="tooltip-div name">{assert.name}</div>
+                    <div className="tooltip-div">{assert.desc}</div>
+                    <div className="tooltip-div">{assert.doc}</div>
+                    <div className="tooltip-div">Code: {assert.code}</div>
                 </ReactTooltip>
             </div>
     })
