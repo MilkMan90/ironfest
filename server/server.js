@@ -105,8 +105,7 @@ app.post('/api/newtest', (request, response) => {
             response.status(200).send(testArray)
           })
         } else {
-          console.log('hey');
-          response.status(404).send({error: runner.message})
+          response.status(200).send({error: runner.message})
         }
       });
     });
