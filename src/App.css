@@ -23,16 +23,15 @@
   to { transform: rotate(360deg); }
 }
 
-
-
 .run-test-button{
-  margin-top: 2px;
-  margin-left: 51%;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border: none;
   border-radius: 3px;
   color: white;
   background-color: #2ecc71;
-  width: 100px;
+  width: 200px;
+  font-size: 15px;
 }
 
 .run-test-button:hover{
@@ -41,5 +40,5 @@
 }
 
 .clear-console-button{
-  
+
 }

@@ -1,14 +1,17 @@
 function example(){
 	return 'taylor rocks'
-}
-
-example() ; var { assert } = require('../chai');describe('Example Test', function() {
+} ; var { assert } = require('../chai');describe('Example Test', function() {
   it('should be a function', function() {
     assert.isFunction(example)
   })
   it('should return taylor rocks', function() {
-    assert.equal(example(), 'taylor dsarocks')
+    assert.isFunction(example)
+    assert.isNotOk('everything', 'this will fail');
   })
-  
-  efeas
+   it('should return taylor rocks', function() {
+    assert.isFunction(examdple)
+    assert.isNotOk('everything', 'this will fail');
+  })
 })
+
+
