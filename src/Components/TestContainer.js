@@ -25,6 +25,7 @@ class TestContainer extends Component {
     const code = this.findCode(assertType)
     const newCode = this.props.code + '\n' + code
     this.updateCode(newCode)
+    this.toggleShowAssertOptions()
   }
   findCode(assertType){
     const assertObj = AssertCode.find((assert)=>{
@@ -47,10 +48,14 @@ class TestContainer extends Component {
                 >
                   {assert.name}
                 </button>
-                <ReactTooltip id={`${assert.name}`}>
-                  <div>{assert.desc}</div>
-                  <div>{assert.doc}</div>
-                  <div>{assert.code}</div>
+                <ReactTooltip
+                  type='info'
+                  id={`${assert.name}`}
+                >
+                    <div className="tooltip-div name">{assert.name}</div>
+                    <div className="tooltip-div">{assert.desc}</div>
+                    <div className="tooltip-div">{assert.doc}</div>
+                    <div className="tooltip-div">Code: {assert.code}</div>
                 </ReactTooltip>
             </div>
     })
