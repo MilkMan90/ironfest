@@ -32,12 +32,12 @@ class Header extends Component {
           <img src={confetti} className="confetti-img"/>
         </h1>
 
-        <div className="login">
+        {/* <div className="login">
           {user ? <span className="user-name">Welcome {user.name.split(' ')[0]}</span>
             : <button className="login-button" onClick={auth.login.bind(this)}>Log In</button>
           }
           {user ? <button className="logout-button" onClick={auth.logout.bind(this)}>Log Out</button> : ''}
-        </div>
+        </div> */}
       </header>
     );
   }
